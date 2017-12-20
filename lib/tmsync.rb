@@ -3,7 +3,12 @@ require "tmsync/version"
 module Tmsync
   class Constants
     IOS_MATCHING_REGEX = '.*\/(\S+)\.lproj\/.*\.strings'
-    IOS_EXLUDE_REGEX = '\/Carthage\/|\/Pods\/'
+    IOS_EXCLUDE_REGEX = '\/Carthage\/|\/Pods\/'
+
+    ANDROID_MATCHING_REGEX = 'app\/src\/main\/res\/values-?(\S+)?\/strings.xml'
+    ANDROID_EXCLUDE_REGEX = '\A\z'
+
+    FALLBACK_LANGUAGE = 'en'
   end
   class FileSearch
     # Initializes a file search object.
@@ -36,7 +41,15 @@ module Tmsync
         [file_path.match(@matching_regex).captures.first, file_path]
       }
 
-      found_files.group_by(&:first).map { |k,v| [k, v.each(&:shift).flatten] }.to_h
+      result = found_files.group_by(&:first).map { |k,v| [k, v.each(&:shift).flatten] }.to_h
+
+      # replace nil key with fallback language
+      if !(nil_values = result[nil]).nil?
+        result[Tmsync::Constants::FALLBACK_LANGUAGE] = nil_values
+        result.delete(nil)
+      end
+
+      result
     end
   end
 end
