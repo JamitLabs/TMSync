@@ -45,7 +45,17 @@ module Tmsync
       else
         result.keys.each do |language|
           result[language].each do |file_path|
-            command = options[:command].gsub('<LANGUAGE>', language).gsub('<FILE_PATH>', file_path)
+            file_directory = File.dirname(file_path)
+            file_extension = File.extname(file_path)
+            file_name = File.basename(file_path, file_extension)
+
+            command = options[:command]
+              .gsub('<LANGUAGE>', language)
+              .gsub('<FILE_PATH>', file_path)
+              .gsub('<FILE_DIR>', file_directory)
+              .gsub('<FILE_EXT>', file_extension)
+              .gsub('<FILE_NAME>', file_name)
+
             puts "Executing: '#{command}'"
             output = %x(#{command})
 
