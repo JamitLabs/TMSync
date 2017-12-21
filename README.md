@@ -13,7 +13,7 @@ Simply run the following to install it:
 Run TMSync simply by calling `tmsync execute` in the command line. The following options are **required**:
 
 - `--path=` / `-p`: Specify the absolute path to search for localization files. Usually the root directory of your project.
-- `--command=` / `-cmd`: Specify the command of your translation manager to download/upload a single translation file. `<LANGUAGE>` and `<FILE_PATH>` will be replaced by the according values.
+- `--command=` / `-cmd`: Specify the command of your translation manager to download/upload a single translation file. `<LANGUAGE>`, `<FILE_PATH>`, `<FILE_DIR>`, `<FILE_NAME>`, `<FILE_EXT>` will be replaced by the according values.
 
 In addition to the required fields you need to either specify a platform (currently supported: `ios`, `android`) **OR** you need to specify a matching regular expression as well as an exclusion regular expression yourself. Note that the matching regular expression needs to have a capture group which catches the language so you can access `<LANGUAGE>` in your command:
 - `--platform=`: Preconfigured regexes for the iOS and Android platform. Specify `ios` or `android`.
@@ -23,19 +23,19 @@ In addition to the required fields you need to either specify a platform (curren
 Here's a **complete example for iOS**:
 
 ```
-tmsync execute --command="echo <LANGUAGE> <FILE_PATH>" -p "/absolute/path/to/project" --platform=ios
+tmsync execute --command="echo <LANGUAGE> <FILE_PATH> <FILE_DIR> <FILE_NAME> <FILE_EXT>" -p "/absolute/path/to/project" --platform=ios
 ```
 
 Here's a **complete example for Android**:
 
 ```
-tmsync execute --command="echo <LANGUAGE> <FILE_PATH>" -p "/absolute/path/to/project" --platform=android
+tmsync execute --command="echo <LANGUAGE> <FILE_PATH> <FILE_DIR> <FILE_NAME> <FILE_EXT>" -p "/absolute/path/to/project" --platform=android
 ```
 
 Here's a **complete custom example**:
 
 ```
-tmsync execute --command="echo <LANGUAGE> <FILE_PATH>" -p "/Users/JamitLabs/Code/Apple/FitterYou" -matching ".*\/\S+\.(\S+)\.yml"
+tmsync execute --command="echo <LANGUAGE> <FILE_PATH> <FILE_DIR> <FILE_NAME> <FILE_EXT>" -p "/Users/JamitLabs/Code/Apple/FitterYou" -matching ".*\/\S+\.(\S+)\.yml"
 ```
 
 
