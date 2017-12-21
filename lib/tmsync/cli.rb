@@ -45,7 +45,7 @@ module Tmsync
       else
         result.keys.each do |language|
           result[language].each do |file_path|
-            file_directory = File.dirname(file_path)
+            file_directory = File.dirname(file_path).gsub(options[:path], '')
             file_extension = File.extname(file_path)
             file_name = File.basename(file_path, file_extension)
 
