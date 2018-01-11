@@ -49,6 +49,8 @@ module Tmsync
             file_directory[0] = '' if file_directory[0] == '/'
             file_extension = File.extname(file_path)
             file_name = File.basename(file_path, file_extension)
+            android_module = ''
+            android_module = file_path.to_a.first if options[:platform] == 'android'
 
             command = options[:command]
               .gsub('<LANGUAGE>', language)
@@ -56,6 +58,7 @@ module Tmsync
               .gsub('<FILE_DIR>', file_directory)
               .gsub('<FILE_EXT>', file_extension)
               .gsub('<FILE_NAME>', file_name)
+              .gsub('<ANDROID_MODULE>', android_module)
 
             puts "Executing: '#{command}'"
             output = %x(#{command})
