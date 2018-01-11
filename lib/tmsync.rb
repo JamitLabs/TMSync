@@ -5,7 +5,7 @@ module Tmsync
     IOS_MATCHING_REGEX = '.*\/(\S+)\.lproj\/.*\.strings'
     IOS_EXCLUDE_REGEX = '\/Carthage\/|\/Pods\/'
 
-    ANDROID_MATCHING_REGEX = 'app\/src\/main\/res\/values-?(\S+)?\/strings.xml'
+    ANDROID_MATCHING_REGEX = '[^\/]*\/src\/main\/res\/values-?(\S+)?\/strings.xml'
     ANDROID_EXCLUDE_REGEX = '\A\z'
 
     FALLBACK_LANGUAGE = 'en'
