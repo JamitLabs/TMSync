@@ -5,7 +5,7 @@ module Tmsync
     IOS_MATCHING_REGEX = '.*\/(\S+)\.lproj\/.*\.strings'
     IOS_EXCLUDE_REGEX = '\/Carthage\/|\/Pods\/'
 
-    ANDROID_MATCHING_REGEX = 'app\/src\/main\/res\/values-?(\S+)?\/strings.xml'
+    ANDROID_MATCHING_REGEX = '[^\/]+\/src\/main\/res\/values-?(\S+)?\/strings.xml'
     ANDROID_EXCLUDE_REGEX = '\A\z'
 
     FALLBACK_LANGUAGE = 'en'
@@ -38,7 +38,7 @@ module Tmsync
       found_files = found_files.select { |file_path|
         file_path =~ @matching_regex
       }.map { |file_path|
-        [file_path.match(@matching_regex).captures.first, file_path]
+        [file_path.match(@matching_regex).captures.last, file_path]
       }
 
       result = found_files.group_by(&:first).map { |k,v| [k, v.each(&:shift).flatten] }.to_h

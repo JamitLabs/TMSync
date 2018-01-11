@@ -38,10 +38,12 @@ RSpec.describe Tmsync do
 
     expect(result.keys).to eq ['de', 'en']
     expect(result['de'].map { |p| p.gsub(android_project_base_path, '') }).to eq [
-      "/app/src/main/res/values-de/strings.xml"
+      "/app/src/main/res/values-de/strings.xml",
+      "/other_module/src/main/res/values-de/strings.xml"
     ]
     expect(result['en'].map { |p| p.gsub(android_project_base_path, '') }).to eq [
-      "/app/src/main/res/values/strings.xml"
+      "/app/src/main/res/values/strings.xml",
+      "/other_module/src/main/res/values/strings.xml"
     ]
   end
 end
