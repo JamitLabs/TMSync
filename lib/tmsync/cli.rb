@@ -50,7 +50,8 @@ module Tmsync
             file_extension = File.extname(file_path)
             file_name = File.basename(file_path, file_extension)
             android_module = ''
-            android_module = file_path.split('/').keep_if { |x| !x.empty? }.first if options[:platform] == 'android'
+            android_module = file_path.match(/([^\/]+)\/src\/main\/res/).captures.first
+
 
             command = options[:command]
               .gsub('<LANGUAGE>', language)
