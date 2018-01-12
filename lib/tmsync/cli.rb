@@ -50,7 +50,7 @@ module Tmsync
             file_extension = File.extname(file_path)
             file_name = File.basename(file_path, file_extension)
             android_module = ''
-            android_module = file_path.match(/([^\/]+)\/src\/main\/res/).captures.first
+            android_module = file_path.match(/([^\/]+)\/src\/main\/res/).captures.first if options[:platform] == 'android'
 
 
             command = options[:command]
