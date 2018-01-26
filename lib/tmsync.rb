@@ -37,7 +37,7 @@ module Tmsync
       # exclude empty files
       found_files = found_files.select { |file_path|
         content = File.open(file_path, 'r') { |f| f.read }
-        !content.strip.empty?
+        !content.to_s.strip.empty?
       }
 
       # apply matching regex
