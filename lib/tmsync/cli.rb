@@ -44,7 +44,7 @@ module Tmsync
       if result.empty?
         puts "No translation files found."
       else
-        ([source_language] | result.keys).each do |language|
+        ([options[:source_language]] | result.keys).each do |language|
           result[language].each do |file_path|
             file_directory = File.dirname(file_path).gsub(options[:path], '')
             file_directory[0] = '' if file_directory[0] == '/'
