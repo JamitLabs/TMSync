@@ -9,6 +9,7 @@ module Tmsync
     option :platform, default: 'custom', type: :string
     option :matching_regex, type: :string, aliases: :matching
     option :exclude_regex, type: :string, aliases: :exclude
+    option :source_language, default: 'en', type: :string, aliases: :source
     def execute
       matching_regex = -> {
         case options[:platform].downcase
@@ -43,7 +44,7 @@ module Tmsync
       if result.empty?
         puts "No translation files found."
       else
-        result.keys.each do |language|
+        ([source_language] | result.keys).each do |language|
           result[language].each do |file_path|
             file_directory = File.dirname(file_path).gsub(options[:path], '')
             file_directory[0] = '' if file_directory[0] == '/'

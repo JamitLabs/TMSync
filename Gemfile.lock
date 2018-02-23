@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tmsync (0.3.4)
+    tmsync (0.3.7)
       thor
 
 GEM
@@ -44,4 +44,4 @@ DEPENDENCIES
   tmsync!
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
